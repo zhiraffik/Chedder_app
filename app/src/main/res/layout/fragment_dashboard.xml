@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1CFA1">
+
+    <!-- Верхняя полоса с заголовком -->
+
+    <!-- Контент -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="24dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/tvSectionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:text="СТАТИСТИКА"
+                android:textColor="#C97900"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!-- Должность -->
+            <TextView
+                android:id="@+id/tvPosition"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="#C97900"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="Должность: -"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Ставка в час -->
+            <TextView
+                android:id="@+id/tvRatePerHour"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="#C97900"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="Ставка в час: -"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Ставка за смену -->
+            <TextView
+                android:id="@+id/tvRatePerShift"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="#C97900"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="Ставка за смену: -"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Отработано смен -->
+            <TextView
+                android:id="@+id/tvWorkedShifts"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="#C97900"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="Отработано смен: -"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Заработано на сегодня -->
+            <TextView
+                android:id="@+id/tvEarnedSoFar"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="#C97900"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="Заработано: -"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Всего за месяц -->
+            <TextView
+                android:id="@+id/tvMonthTotal"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="#C97900"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="Всего за месяц: -"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:layout_marginBottom="12dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
