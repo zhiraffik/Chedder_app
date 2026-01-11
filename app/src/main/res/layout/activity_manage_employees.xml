@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1CFA1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="18dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Сотрудники"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="#C97900"
+            android:layout_marginBottom="10dp"/>
+
+        <Spinner
+            android:id="@+id/spEmployee"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#F7E9D9"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:layout_marginBottom="14dp"/>
+
+        <EditText
+            android:id="@+id/etLastName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="10dp"
+            android:background="#C7830A"
+            android:hint="Фамилия"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/etFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="10dp"
+            android:background="#C7830A"
+            android:hint="Имя"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="10dp"
+            android:background="#C7830A"
+            android:hint="E-mail (обязательно)"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:textSize="18sp" />
+
+        <!-- Пароль + глазик (в одной строке) -->
+        <LinearLayout
+            android:id="@+id/passwordRow"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#C7830A"
+                android:hint="Пароль (обязательно)"
+                android:inputType="textPassword"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btnTogglePassword"
+                android:layout_width="52dp"
+                android:layout_height="match_parent"
+                android:background="#B87400"
+                android:text="👁"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="10dp"
+            android:background="#C7830A"
+            android:hint="Телефон (обязательно)"
+            android:inputType="phone"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/spPosition"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#F7E9D9"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <EditText
+            android:id="@+id/etRate"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="10dp"
+            android:background="#C7830A"
+            android:hint="Ставка в час"
+            android:inputType="numberDecimal"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/etHoursPerShift"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="16dp"
+            android:background="#C7830A"
+            android:hint="Часов в смене"
+            android:inputType="number"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnSaveEmployee"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:background="#C97900"
+                android:text="СОХРАНИТЬ"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"/>
+
+            <Button
+                android:id="@+id/btnDeleteEmployee"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:background="#F03A23"
+                android:text="УДАЛИТЬ"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

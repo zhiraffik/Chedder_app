@@ -13,17 +13,34 @@ import java.util.List;
 public interface UserDao {
 
     @Insert
-    void insert(User user);
+    long insert(User user);
+
+    @Update
+    void update(User user);
 
     @Query("SELECT * FROM users WHERE email = :email AND password = :password LIMIT 1")
     User login(String email, String password);
 
-    @Query("SELECT * FROM users WHERE id = :id")
+    @Query("SELECT * FROM users WHERE id = :id LIMIT 1")
     User getById(int id);
+
+    @Query("SELECT * FROM users WHERE role = 'employee' AND adminId = :adminId ORDER BY lastName, firstName")
+    List<User> getEmployeesForAdmin(int adminId);
+
+    @Query("SELECT * FROM users WHERE role = 'admin' LIMIT 1")
+    User getAnyAdmin();
 
     @Query("SELECT * FROM users")
     List<User> getAll();
 
-    @Update
-    void update(User user);
+    @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
+    User getByEmail(String email);
+
+    // ✅ нужно для проверки уникальности email при редактировании
+    @Query("SELECT * FROM users WHERE email = :email AND id != :excludeId LIMIT 1")
+    User getByEmailExceptId(String email, int excludeId);
+
+    // ✅ нужно для удаления сотрудника
+    @Query("DELETE FROM users WHERE id = :id")
+    void deleteById(int id);
 }

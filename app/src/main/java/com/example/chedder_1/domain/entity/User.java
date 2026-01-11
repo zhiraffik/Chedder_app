@@ -2,11 +2,14 @@ package com.example.chedder_1.domain.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "users")
-public class User {
+@Entity(tableName = "users",
+        indices = {@Index("adminId")}
+)
 
+public class User {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
@@ -14,7 +17,7 @@ public class User {
     public String email;
 
     public String password;
-
+    public String phone;
     public String role; // admin / employee
 
     public String firstName;
@@ -23,4 +26,7 @@ public class User {
 
     public double ratePerHour;
     public int hoursPerShift;
+
+    public Integer adminId; // NULL для админа, != NULL для сотрудников
 }
+

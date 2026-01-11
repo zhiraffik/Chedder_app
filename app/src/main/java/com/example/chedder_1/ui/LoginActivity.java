@@ -28,26 +28,37 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         prefs = getSharedPreferences("auth", MODE_PRIVATE);
+        db = AppDataBase.getInstance(this);
 
-        // если уже авторизован — сразу в MainActivity
-        if (prefs.contains("userId")) {
+        // Создаём администратора, если БД пустая (или админа нет)
+        createAdminIfNotExists();
+
+        // Если уже авторизован — проверим, что пользователь реально существует
+        if (hasValidSession()) {
             openMain();
             return;
+        } else {
+            // если в prefs что-то осталось битое — почистим
+            prefs.edit().clear().apply();
         }
 
         setContentView(R.layout.activity_login);
-
-        // инициализация БД
-        db = AppDataBase.getInstance(this);
-
-        // создаём администратора, если БД пустая
-        createAdminIfNotExists();
 
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
 
         btnLogin.setOnClickListener(v -> login());
+    }
+
+    private boolean hasValidSession() {
+        if (!prefs.contains("userId")) return false;
+
+        int userId = prefs.getInt("userId", -1);
+        if (userId == -1) return false;
+
+        User u = db.userDao().getById(userId);
+        return u != null;
     }
 
     private void login() {
@@ -59,19 +70,27 @@ public class LoginActivity extends AppCompatActivity {
             etEmail.setError("Некорректный e-mail");
             return;
         }
-
         if (password.length() < 4) {
             etPassword.setError("Минимум 4 символа");
             return;
         }
 
-        // 🔐 АВТОРИЗАЦИЯ ЧЕРЕЗ ROOM
+        // 🔐 Авторизация через Room
         User user = db.userDao().login(email, password);
 
         if (user != null) {
+            // Для employee важно знать adminId (чтобы грузить его график)
+            int adminIdForSession;
+            if ("admin".equals(user.role)) {
+                adminIdForSession = user.id; // админ сам себе владелец
+            } else {
+                adminIdForSession = (user.adminId != null) ? user.adminId : -1;
+            }
+
             prefs.edit()
                     .putInt("userId", user.id)
                     .putString("role", user.role)
+                    .putInt("adminId", adminIdForSession)
                     .apply();
 
             openMain();
@@ -81,19 +100,22 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void createAdminIfNotExists() {
-        if (db.userDao().getAll().isEmpty()) {
-            User admin = new User();
-            admin.email = "admin@mail.ru";
-            admin.password = "admin";
-            admin.role = "admin";
-            admin.firstName = "Администратор";
-            admin.lastName = "";
-            admin.position = "Админ";
-            admin.ratePerHour = 0;
-            admin.hoursPerShift = 0;
 
-            db.userDao().insert(admin);
-        }
+        User anyAdmin = db.userDao().getAnyAdmin();
+        if (anyAdmin != null) return;
+
+        User admin = new User();
+        admin.email = "admin@mail.ru";
+        admin.password = "admin";
+        admin.role = "admin";
+        admin.firstName = "Администратор";
+        admin.lastName = "";
+        admin.position = "admin";
+        admin.ratePerHour = 0;
+        admin.hoursPerShift = 0;
+        admin.adminId = null;
+
+        db.userDao().insert(admin);
     }
 
     private void openMain() {

@@ -28,9 +28,11 @@
         <activity
             android:name="MainActivity"
             android:exported="true"
+            android:windowSoftInputMode="adjustPan"
             android:label="Главная">
         </activity>
-
+        <activity android:name=".ui.AddEmployeeActivity" />
+        <activity android:name=".ui.ManageEmployeesActivity" />
     </application>
 
 </manifest>
